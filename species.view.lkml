@@ -2,9 +2,14 @@ view: species {
   sql_table_name: biodiversity_in_parks.species ;;
 
   dimension: species_id {
-    primary_key: yes
     type: string
     sql: ${TABLE}.Species_ID ;;
+  }
+
+  dimension: Park_code_ID {
+    primary_key: yes
+    type: string
+    sql: SELECT LEFT(Species_ID, 4) FROM ${TABLE}.species_id   ;;
   }
 
   dimension: abundance {

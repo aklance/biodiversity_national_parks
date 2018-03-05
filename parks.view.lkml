@@ -40,13 +40,39 @@ view: parks {
     sql: ${TABLE}.State ;;
   }
 
+  dimension: region {
+    case: {
+      when: {
+        sql: ${state} in ('WA','OR','CA','NV','UT','WY','ID','MT','CO','AK','HI', 'CA, NV', 'WY, MT, ID' ) ;;
+        label: "West"
+      }
+      when: {
+        sql: ${state} in ('AZ','NM','TX','OK') ;;
+        label: "Southwest"
+      }
+      when: {
+        sql: ${state} in ('ND','SD','IA','WI','MN','OH','IN','MO','NE','KS','MI','IL') ;;
+        label: "Midwest"
+      }
+      when: {
+        sql: ${state} in ('MD','DE','NJ','CT','RI','ME','NH','PA','NY','VT','DC', 'MA') ;;
+        label: "Northeast"
+      }
+      when: {
+        sql: ${state} in ('AR','LA','MS','AL','GA','FL','SC','NC','VA','TN','KY','WV', 'TN, NC') ;;
+        label: "Southeast"
+      }
+      else: "Unknown"
+    }
+  }
+
   dimension: park_type {
     label: "* Park Type"
     sql: ${TABLE}.is_large_park AND ${TABLE}.is_small_park ;;
   }
 
   parameter: filter_on_park_type {
-    label: "* Park Type"
+    label: "Park Type"
     type: string
 
     allowed_value: {
