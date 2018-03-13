@@ -17,8 +17,8 @@ explore: species {
   label: "Parks and Species"
   join: parks {
     type: left_outer
-    sql_on: ${parks.park_code} = ${species.park_code_id};;
-    relationship: many_to_many
+    sql_on: ${parks.name} = ${species.park_name};;
+    relationship: one_to_many
   }
 }
 

@@ -9,41 +9,42 @@ view: species {
     sql: ${TABLE}.Species_ID ;;
   }
 
-  dimension: park_code_id {
-    type: string
-    sql: SUBSTR(${species_id}, 1, 4) ;;
-  }
 
   dimension: abundance {
+    description: "Commonality of sightings"
     type: string
     sql: ${TABLE}.Abundance ;;
   }
 
   dimension: category {
+    description: "Type of Species: Mammals, Birds, Reptiles, etc"
     type: string
     sql: ${TABLE}.Category ;;
     link: {
       label: "Search on Wikipedia"
-      url: "https://en.wikipedia.org/wiki/{{ category_format._value }}"
+      url: "https://en.wikipedia.org/wiki/{{ category_formatted._value }}"
     }
   }
 
-  dimension: category_format {
+  dimension: category_formatted {
     type:  string
     sql: REPLACE(category, "/", "_" );;
   }
 
   dimension: common_names {
+    description: "Usual common name(s) for the species"
     type: string
     sql: ${TABLE}.Common_Names ;;
   }
 
   dimension: conservation_status {
+    description: "IUCN species conservation status"
     type: string
     sql: ${TABLE}.Conservation_Status ;;
   }
 
   dimension: family {
+    description: "In biological classification, taxonomic rank is the relative level of a group of organisms (a taxon) in a taxonomic hierarchy. Examples of taxonomic ranks are species, genus, family, order, class, phylum, kingdom, domain, etc."
     type: string
     sql: ${TABLE}.Family ;;
   }
@@ -55,16 +56,19 @@ view: species {
   }
 
   dimension: nativeness {
+    description: "Whether the species is native to the area or a non-native/invasive"
     type: string
     sql: ${TABLE}.Nativeness ;;
   }
 
   dimension: occurrence {
+    description: "Whether or not the species presence in the park has been confirmed (one of 'Present', 'Not Confirmed', 'Not Present (Historical)'"
     type: string
     sql: ${TABLE}.Occurrence ;;
   }
 
   dimension: order {
+    description: "In biological classification, the order is a taxonomic rank used in the classification of organisms and recognized by the nomenclature codes"
     type: string
     sql: ${TABLE}.order ;;
   }
@@ -107,6 +111,7 @@ view: species {
   # https://www.inaturalist.org/taxa/search?utf8=✓&q=
 
   dimension: seasonality {
+    description: "When the species can be found in the park. Blank if the species is found there year-round"
     type: string
     sql: ${TABLE}.Seasonality ;;
   }

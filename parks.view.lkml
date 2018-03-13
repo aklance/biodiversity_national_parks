@@ -4,6 +4,7 @@ view: parks {
 
 ## DIMENSIONS ##
   dimension: acres {
+    description: "Size of the park in acres"
     type: number
     sql: ${TABLE}.Acres ;;
   }
@@ -21,6 +22,7 @@ view: parks {
   }
 
   dimension: location {
+    description: "Location in lat/long coordinates"
     type: location
     sql_latitude: ${latitude} ;;
     sql_longitude: ${longitude} ;;
@@ -28,12 +30,14 @@ view: parks {
   }
 
   dimension: park_code {
+    description: "Size of the park in acres"
     primary_key: yes
     type: string
     sql: ${TABLE}.Park_Code ;;
   }
 
   dimension: name {
+    description: "Official park name"
     type: string
     sql: ${TABLE}.Park_Name ;;
     link: {
@@ -46,11 +50,13 @@ view: parks {
 
 
   dimension: state {
+    description: "The state in the US where the park is located"
     type: string
     sql: ${TABLE}.State ;;
   }
 
   dimension: region {
+    description: "Region in the US where the park is located"
     case: {
       when: {
         sql: ${state} in ('WA','OR','CA','NV','UT','WY','ID','MT','CO','AK','HI', 'CA, NV', 'WY, MT, ID' ) ;;
@@ -77,7 +83,7 @@ view: parks {
   }
 
 
-  parameter: filter_on_park_type {
+  parameter: filter_on_park_size {
     label: "Park Size"
     type: string
 
