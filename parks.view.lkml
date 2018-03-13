@@ -22,7 +22,7 @@ view: parks {
   }
 
   dimension: location {
-    description: "Location in lat/long coordinates"
+    description: "Location in lat,long coordinates"
     type: location
     sql_latitude: ${latitude} ;;
     sql_longitude: ${longitude} ;;
@@ -80,6 +80,7 @@ view: parks {
       }
       else: "Unknown"
     }
+    drill_fields: [drill_parks*]
   }
 
 
@@ -128,7 +129,7 @@ view: parks {
     type: count
   }
 
-  set: drill_fields {
+  set: drill_parks {
     fields: [name, state, location, region, acres]
     }
 

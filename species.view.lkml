@@ -24,6 +24,7 @@ view: species {
       label: "Search on Wikipedia"
       url: "https://en.wikipedia.org/wiki/{{ category_formatted._value }}"
     }
+    drill_fields: [drill_species*]
   }
 
   dimension: category_formatted {
@@ -120,6 +121,11 @@ view: species {
     label: "Species Count"
     type: count
   }
+
+set: drill_species {
+  fields: [park_name, category, order, scientific_name]
+}
+
 }
 
 #
