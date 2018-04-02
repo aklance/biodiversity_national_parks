@@ -14,15 +14,25 @@ datagroup: biodiversity_default_datagroup {
 persist_with: biodiversity_default_datagroup
 
 explore: species {
-  label: "Parks and Species"
+  label: "Cities, Parks, & Species"
+
   join: parks {
     type: left_outer
     sql_on: ${parks.name} = ${species.park_name};;
     relationship: one_to_many
   }
+
+  join: get_your_location {
+    type:  cross
+#     sql_on: ${get_your_location.state_id} = ${parks.state} ;;
+    relationship: many_to_one
+  }
+
 }
 
-
+explore: cities {
+  hidden: yes
+}
 
 
 # NOTE: please see https://looker.com/docs/r/sql/bigquery?version=5.10
