@@ -6,14 +6,14 @@ view: parks {
   dimension: acres {
     description: "Size of the park in acres"
     type: number
-    sql: ${TABLE}.Acres ;;
+    sql: ${TABLE}.Park_Acres ;;
     drill_fields: [drill_parks*]
   }
 
   dimension: relative_size {
     description: "The amount of football fields that fit in this park"
     type: number
-    sql: round(${TABLE}.Acres/1.32, 0) ;;
+    sql: round(${acres}/1.32, 0) ;;
   }
 
   dimension: latitude {
@@ -38,16 +38,17 @@ view: parks {
 
   }
 
-  dimension: distance {
+  dimension: distance2 {
     type: distance
     start_location_field: get_your_location.location
     end_location_field: location
     units: miles
+    hidden: yes
   }
 
-  dimension: distance2 {
+  dimension: distance {
     type: number
-    sql: CAST(${distance} AS INT64) ;;
+    sql: CAST(${distance2} AS INT64) ;;
   }
 
 

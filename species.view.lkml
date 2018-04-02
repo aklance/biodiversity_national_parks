@@ -187,6 +187,7 @@ view: species {
 
   measure: count_distinct {
     type: count_distinct
+    sql: ${species_id} ;;
   }
 
 
