@@ -19,7 +19,7 @@ explore: species {
   join: parks {
     type: left_outer
     sql_on: ${parks.name} = ${species.park_name};;
-    relationship: one_to_many
+    relationship: many_to_one
   }
 
   join: get_your_location {
