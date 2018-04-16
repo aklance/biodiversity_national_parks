@@ -49,7 +49,6 @@ view: parks {
   dimension: distance {
     type: number
     sql: CAST(${distance2} AS INT64) ;;
-
   }
 
 
@@ -163,6 +162,11 @@ view: parks {
     label: "Small National Park"
     description: "Park has less than a hundred thousand acres"
   }
+
+#   dimension: nps_logo {
+#   html: <a <img src="https://www.nps.gov/common/commonspot/templates/images/logos/nps_social_image_02.jpg" height=15 width=15> </a> ;;
+#   }
+#   sql: ${count} ;;
 
 ## MEASURES ##
   measure: count {
