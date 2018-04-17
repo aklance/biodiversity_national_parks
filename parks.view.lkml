@@ -65,7 +65,7 @@ view: parks {
     sql: ${TABLE}.Park_Name ;;
     html:
     {{ linked_value }}
-    <a href="/dashboards/90?={{ value }}" target="_new">
+    <a href="/dashboards/90?={{ value | url_encode }}&Park%20Name= {{ value }}" target="_new">
     <img src="/images/qr-graph-line@2x.png" height=20 width=20> </a>
     <a href="https://www.google.com/search?q={{ value }}" target="_new">
     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Google-favicon-2015.png" height=15 width=15> </a> ;;
