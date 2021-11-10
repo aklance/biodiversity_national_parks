@@ -64,12 +64,22 @@ view: parks {
     type: string
     sql: ${TABLE}.Park_Name ;;
     html:
-    {{ linked_value }}
-    <a href="/dashboards/90?={{ value | url_encode }}&Park%20Name= {{ value }}" target="_new">
-    <img src="/images/qr-graph-line@2x.png" height=20 width=20> </a>
-    <a href="https://www.google.com/search?q={{ value }}" target="_new">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Google-favicon-2015.png" height=15 width=15> </a> ;;
-    }
+     {{ linked_value }}
+      <img src="/images/qr-graph-line@2x.png" height=20 width=20> </a> ;;
+      }
+
+
+
+#     html:
+#     {{ linked_value }}
+#       <img src="/images/qr-graph-line@2x.png" height=20 width=20> </a>
+#
+#
+#     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Google-favicon-2015.png" height=15 width=15> </a> ;;
+#     }
+#     <a href="https://www.google.com/search?q={{ value }}" target="_new">
+#     <a href="/dashboards/90?={{ park_code | url_encode }}&Park%20Name= {{ park_code }}" target="_new">
+#     <img src="/images/qr-graph-line@2x.png" height=20 width=20> </a>
 #     link: {
 #       label: "Google Search"
 #       url: "https://www.google.com/search?q= {{ value }}"
@@ -175,7 +185,38 @@ view: parks {
 
   measure: total_acres {
     type: sum
-    sql: ${acres} ;;
+    sql: ${TABLE}.Park_Acres ;;
+    group_label: "Test"
+  }
+
+  measure: percent_total_acres {
+    type:  percent_of_total
+    sql: ${total_acres} ;;
+    group_label: "Test"
+  }
+
+  measure: average {
+    type:  average
+    sql:  ${acres} ;;
+  }
+
+  measure: count_above_average {
+    sql:  COUNT(CASE WHEN ${acres} > ${average} THEN 1 ELSE 0 end);;
+  }
+
+  measure: count_parks {
+    type:  count_distinct
+    sql:  ${park_code} ;;
+  }
+
+  measure: count_state {
+    type: count_distinct
+    sql:  ${state} ;;
+  }
+
+  measure: equation {
+    type: number
+    sql: ${total_acres}/(${count_parks}+${count_state}) ;;
   }
 
   set: drill_parks {
